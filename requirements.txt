@@ -1,0 +1,10 @@
+# Core computation
+numpy>=1.24.0
+scipy>=1.11.0
+
+# API and data fetching
+requests>=2.31.0
+
+# Visualization and UI
+plotly>=5.17.0
+streamlit>=1.28.0
