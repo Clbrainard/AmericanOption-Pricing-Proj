@@ -5,10 +5,10 @@ import pandas_datareader.data as web
 
 class riskFreeAsset:
     def __init__(self, rate):
-        self.rate = rate  # annual risk-free rate
+        self.rate = rate  
 
     def get_expected_return(self):
-        return self.rate / 252  # daily return if needed
+        return self.rate / 252  
 
     def get_variance(self):
         return 0
@@ -94,9 +94,3 @@ class stock:
 
         return cov / (stdA * stdB)
 
-# Example usage:
-if __name__ == "__main__":
-    #A = stock("AAPL")
-    #B = stock("NVDA")
-    C = riskFreeAsset(0.05)
-    print(C.get_expected_return())
