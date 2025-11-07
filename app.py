@@ -11,7 +11,13 @@ def price_and_delta(r,ticker,initial_price,strike,time_to_maturity,div_yield,sid
 st.set_page_config(page_title="Option Pricer (Price & Delta)", page_icon="📊")
 
 st.title("📊 Option Pricer — Price & Delta")
-st.caption("Sidebar for inputs → click Render → see results on the right.")
+st.caption("""
+        This project uses a binomial tree to approximate prices of American option contracts. The binomial model 
+        employs an implied volatility surface (seen in other project) to adjust volatilities as each layer of the tree,
+        more accurately reflecting market volatility sentiment as time changes. The approximation is not accurate to
+        real market option prices, due to a few factors including compuational complexity. However it serves as a tool
+        to demonstrate the power of the binomial option pricing model.
+           """)
 
 # --- Sidebar inputs -----------------------------------------------------------
 st.sidebar.header("Parameters")
@@ -19,15 +25,13 @@ st.sidebar.header("Parameters")
 ticker = st.sidebar.text_input("Ticker", value="AAPL")
 side = st.sidebar.selectbox("Option Side", options=["call", "put"], index=0)
 
-c1, c2 = st.sidebar.columns(2)
-with c1:
-    S0 = st.number_input("Spot Price S₀", min_value=0.0, value=190.0, step=0.01, format="%.2f")
-    T = st.number_input("Days to maturity", min_value=7, value=7, step=1)
-    steps = st.number_input("Binomial Steps", min_value=5, value=10, step=1)
-with c2:
-    K = st.number_input("Strike K", min_value=0.0, value=190.0, step=0.25, format="%.2f")
-    r = st.number_input("Risk-free r (annual)", min_value=-1.0, value=0.050000, step=0.01, format="%.2f")
-    q = st.number_input("Dividend Yield q (decimal)", min_value=0.0, value=0.000000, step=0.0001, format="%.4f")
+S0 = st.number_input("Spot Price S₀", min_value=0.0, value=190.0, step=0.01, format="%.2f")
+T = st.number_input("Days to maturity", min_value=7, value=7, step=1)
+steps = st.number_input("Binomial Steps", min_value=5, value=10, step=1)
+
+K = st.number_input("Strike K", min_value=0.0, value=190.0, step=0.25, format="%.2f")
+r = st.number_input("Risk-free r (annual)", min_value=-1.0, value=0.050000, step=0.01, format="%.2f")
+q = st.number_input("Dividend Yield q (decimal)", min_value=0.0, value=0.000000, step=0.0001, format="%.4f")
 
 render = st.sidebar.button("Render")
 
